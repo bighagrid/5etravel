@@ -1,0 +1,211 @@
+<html>
+<head>
+	<title>5e Mounts & Vehicles Calculator</title>
+	<script>
+		function main () {
+			const mountCC = [0,480,420,540,1320,195,1080,225,480,210,540];		
+			const vehicleWGT = [0,0,600,200,100,300,400];
+			const saddleWGT = [0,0,40,30,15,25];
+			const mountSpeed = [0,50,40,40,40,40,30,40,60,40,60];
+			
+			var mount = document.getElementById("typeMount").value;
+			var team = document.getElementById("numMount").value;
+			var bit = document.getElementById("typeBit").value;
+			var saddle = document.getElementById("typeSaddle").value;
+			var bags = document.getElementById("typeBags").value;
+			var vehicle = document.getElementById("typeVehicle").value;
+
+			var baseSpeed = mountSpeed[mount];
+			var cc = mountCC[mount] * team;
+			var vehicleWeight = vehicleWGT[vehicle];
+			var saddleWeight = saddleWGT[saddle];
+			
+			var drawn = cc * 5;
+			var cargo = (drawn - (bit * team) - (saddleWeight * team) - (bags * team) - (vehicleWeight) );
+			var mph = baseSpeed / 10;
+			var travel = mph * 8;
+
+			var mphFast = mph * 1.3;
+			var travelFast = mphFast * 8;
+			var gallop = mphFast * 2;
+			var travelGallop = gallop * 8;
+
+			document.getElementById("carryCapacity").value = cc;
+			document.getElementById("drawnCapacity").value = drawn;
+			document.getElementById("cargoCapacity").value = cargo;
+			document.getElementById("baseSpeed").value = baseSpeed;
+			document.getElementById("hourSpeed").value = mph;
+			document.getElementById("daySpeed").value = travel;
+			document.getElementById("hourFast").value = Math.round(mphFast);
+			document.getElementById("dayFast").value = Math.round(travelFast);
+			document.getElementById("gallop").value = Math.round(gallop);
+			document.getElementById("daygallop").value = Math.round(travelGallop);
+
+			
+		}
+		
+	</script>
+</head>
+<body OnLoad='main()'>
+	<h1>Mounts and Vehicles Calculator</h1>
+		<form>
+		<table>
+			<tr>
+				<th>Number of Mounts</th>
+				<td>
+					<select id='numMount' OnChange='main()'>
+						<option value='1'>1</option>
+						<option value='2'>2</option>
+						<option value='3'>3</option>
+						<option value='4'>4</option>
+						<option value='5'>5</option>
+						<option value='6'>6</option>
+						<option value='7'>7</option>
+						<option value='8'>8</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>Type of Mount</th>
+				<td>
+					<select id='typeMount' OnChange='main()'>
+						<option value='0'>Choose Mount</option>
+						<option value='1'>Camel</option>
+						<option value='2'>Donkey or Mule</option>
+						<option value='3'>Draft Horse</option>
+						<option value='4'>Elephant</option>
+						<option value='5'>Mastiff</option>
+						<option value='6'>Ox</option>
+						<option value='7'>Pony</option>
+						<option value='8'>Riding Horse</option>
+						<option value='9'>Steel Defender</option>
+						<option value='10'>Warhorse</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>Bit and Bridle?</th>
+				<td>
+					<select id='typeBit' OnChange='main()'>
+						<option value='0'>No</option>
+						<option value='1'>Yes</option>
+					</select>
+				</td>
+			</tr>						
+			<tr>
+				<th>Saddle?</th>
+				<td>
+					<select id='typeSaddle' OnChange='main()'>
+						<option value='1'>None</option>
+						<option value='2'>Exotic</option>
+						<option value='3'>Military</option>
+						<option value='4'>Pack</option>
+						<option value='5'>Riding</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>Saddlebags?</th>
+				<td>
+					<select id='typeBags' OnChange='main()'>
+						<option value='0'>No</option>
+						<option value='8'>Yes</option>
+					</select>
+				</td>
+			</tr>						
+			<tr>
+				<th>Drawn Vehicle?</th>
+				<td>
+					<select id='typeVehicle' OnChange='main()'>
+						<option value='1'>None</option>
+						<option value='2'>Carriage</option>
+						<option value='3'>Cart</option>
+						<option value='4'>Chariot</option>
+						<option value='5'>Sled</option>
+						<option value='6'>Wagon</option>
+					</select>
+				</td>
+			</tr>
+		
+			<tr>
+				<td colspan=2><hr></td>
+			</tr>
+		
+			<tr>
+				<th>Carry Capacity</th>
+				<td>
+					<input type=text id='carryCapacity' value='0' size=5 > lbs
+				</td>
+			</tr>						
+
+			<tr>
+				<th>Drawn Vehicle Capacity</th>
+				<td>
+					<input type=text id='drawnCapacity' value='0' size=5 readonly> lbs
+				</td>
+			</tr>						
+
+			<tr>
+				<th>Cargo Capacity</th>
+				<td>
+					<input type=text id='cargoCapacity' value='0' size=5 readonly> lbs
+				</td>
+			</tr>						
+			<tr>
+				<td colspan=2><hr></td>
+			</tr>
+
+			<tr>
+				<th>Base Speed</th>
+				<td>
+					<input type=text id='baseSpeed' value='0' size=2 readonly> ft
+				</td>
+			</tr>						
+
+			<tr>
+				<th>Base Speed - per hour</th>
+				<td>
+					<input type=text id='hourSpeed' value='0' size=3 readonly> mph
+				</td>
+			</tr>						
+
+			<tr>
+				<th>Base Speed - 8 hour Travel</th>
+				<td>
+					<input type=text id='daySpeed' value='0' size=3 readonly> miles
+				</td>
+			</tr>						
+
+			<tr>
+				<th>Fast Pace - per hour</th>
+				<td>
+					<input type=text id='hourFast' value='0' size=3 readonly> mph
+				</td>
+			</tr>						
+
+			<tr>
+				<th>Fast Pace - 8 hour Travel</th>
+				<td>
+					<input type=text id='dayFast' value='0' size=3 readonly> miles
+				</td>
+			</tr>						
+
+			<tr>
+				<th>Gallop - Limit 1 hour for Normal Mounts</th>
+				<td>
+					<input type=text id='gallop' value='0' size=3 readonly> mph
+				</td>
+			</tr>						
+
+			<tr>
+				<th>Gallop - 8 Hours for Special Mounts</th>
+				<td>
+					<input type=text id='daygallop' value='0' size=3 readonly> mph
+				</td>
+			</tr>						
+		
+		</table>
+		<button onclick='main()'>Reset</button>
+	</form>
+</body>
+</html>
