@@ -12,10 +12,11 @@
 			var team = document.getElementById("numMount").value;
 			var bit = document.getElementById("typeBit").value;
 			var saddle = document.getElementById("typeSaddle").value;
+			var shoes = document.getElementById("typeShoes").value;
 			var bags = document.getElementById("typeBags").value;
 			var vehicle = document.getElementById("typeVehicle").value;
 
-			var baseSpeed = mountSpeed[mount];
+			var baseSpeed = mountSpeed[mount] + shoes;
 			var cc = mountCC[mount] * team;
 			var vehicleWeight = vehicleWGT[vehicle];
 			var saddleWeight = saddleWGT[saddle];
@@ -93,7 +94,7 @@
 						<option value='1'>Yes</option>
 					</select>
 				</td>
-			</tr>						
+			</tr>		
 			<tr>
 				<th>Saddle?</th>
 				<td>
@@ -128,6 +129,15 @@
 					</select>
 				</td>
 			</tr>
+			<tr>
+				<th>Horseshoes of Speed?</th>
+				<td>
+					<select id='typeShoes' OnChange='main()'>
+						<option value='0'>No</option>
+						<option value='30'>Yes</option>
+					</select>
+				</td>
+			</tr>		
 		
 			<tr>
 				<td colspan=2><hr></td>
